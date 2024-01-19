@@ -30,4 +30,7 @@ export default {
   <button @click="decrease">
     disminuir el contador
   </button>
+  <p v-if="count <= 10">vamos tu puedes</p>
+  <p v-else>ya te falta muy poco</p>
+  <p v-if="count >= 20">ya lo has logrado </p>
 </template>

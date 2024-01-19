@@ -27,4 +27,5 @@ function decrease() {
   <button @click="decrease">
     boton para degradar
   </button>
+  <p>vamos tu puedes </p>
 </template>
