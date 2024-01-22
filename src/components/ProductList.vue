@@ -10,15 +10,18 @@ export default {
     productcard,
     Cart
   },
+  props: ['details'],
   data() {
     return {
       products: <Array<Product>>[
 
         {name: 'Silla gamer', price: 56, id: 1},
         {name: "Mesa gamer", price: 100, id: 2},
+        {name: "Monitor MSI", price: 150, id: 3},
+        {name: 'Silla gamer', price: 56, id: 1},
+        {name: "Mesa gamer", price: 100, id: 2},
         {name: "Monitor MSI", price: 150, id: 3}
-      ],
-      details: <Array<CartDetail>>[ ]
+      ]
     }
   },
   methods: {
@@ -48,5 +51,4 @@ export default {
          @addProduct="onaddProduct(p.id)" />
     </v-col>
   </v-row>
-  <cart :details="details"/>
 </template>
