@@ -1,5 +1,4 @@
 <script  lang="ts">
-import { RouterView } from 'vue-router';
 import Navbar from '@/components/NavBar.vue'
 
 export default {

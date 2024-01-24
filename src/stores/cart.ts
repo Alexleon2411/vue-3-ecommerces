@@ -31,5 +31,25 @@ export const useCartStore = defineStore('cart', {
         });
       }
     },
+    increaseItem(productId: number){
+      const detailFound =this.details.find(d => d.productId == productId);
+      if (detailFound) {
+        detailFound.quantity += 1;
+      }
+    },
+    decreaseItem(productId: number){
+      const detailFound = this.details.find(d => d.productId == productId);
+
+      if (detailFound) {
+          detailFound.quantity = Math.max(1, detailFound.quantity - 1);
+        }
+    },
+    removeItem(productId: number) {
+      const index = this.details.findIndex(d => d.productId === productId);
+
+        // Eliminar el elemento de la matriz
+        this.details.splice(index, 1);
+
+    }
   },
 })
