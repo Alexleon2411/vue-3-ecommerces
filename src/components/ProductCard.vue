@@ -1,8 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script  lang="ts">
+
 import type { PropType } from 'vue';
-import type {Product} from '../model/types';
 import { useCartStore } from "@/stores/cart";
+import type { Product } from '../model/types';
+
 export default {
   props: {
     product: {
@@ -14,7 +16,13 @@ export default {
   methods: {
      onaddButtonClick() {
       const cartStore = useCartStore();
-      cartStore.addProduct(this.product.id);
+      cartStore.addProduct(this.product);
+    }
+  },
+  computed: {
+    productImageUrl() {
+      return this.product.image
+      ?? 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg';
     }
   }
 }
@@ -23,7 +31,7 @@ export default {
 <template>
   <v-card>
     <v-img
-    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+    :src="productImageUrl"
     height="200px"
     cover>
   </v-img>

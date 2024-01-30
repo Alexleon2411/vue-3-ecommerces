@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import type {CartDetail} from '@/model/types'
+import type {CartDetail, Product} from '@/model/types'
 
 
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    details: <Array<CartDetail>>[]
+    details: [] as CartDetail[]
   }),
   getters: {
     cartItemsCount: (state) => {
@@ -15,37 +15,45 @@ export const useCartStore = defineStore('cart', {
         count += detail.quantity;
       });
       return count  ;
+    },
+    totalAmount: (state) => {
+      let total = 0;
+      state.details.forEach(d => {
+        total+= d.product.price * d.quantity;
+      })
+
+      return total;
     }
 
   },
   actions: {
-    addProduct(productId: number) {
-      const detailFound =this.details.find(d => d.productId == productId);
+    addProduct(product: Product ) {
+      const detailFound =this.details.find(d => d.product.id === product.id);
 
       if(detailFound){
         detailFound.quantity += 1;
       }else{
         this.details.push({
-          productId,
+          product,
           quantity: 1
         });
       }
     },
-    increaseItem(productId: number){
-      const detailFound =this.details.find(d => d.productId == productId);
+    increment(productId: number){
+      const detailFound =this.details.find(d => d.product.id === productId);
       if (detailFound) {
         detailFound.quantity += 1;
       }
     },
-    decreaseItem(productId: number){
-      const detailFound = this.details.find(d => d.productId == productId);
+    decrement(productId: number){
+      const detailFound =this.details.find(d => d.product.id === productId);
 
       if (detailFound) {
           detailFound.quantity = Math.max(1, detailFound.quantity - 1);
         }
     },
-    removeItem(productId: number) {
-      const index = this.details.findIndex(d => d.productId === productId);
+    deleteProduct(productId: number) {
+      const index = this.details.findIndex(d => d.product.id === productId);
 
         // Eliminar el elemento de la matriz
         this.details.splice(index, 1);
